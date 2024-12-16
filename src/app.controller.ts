@@ -50,4 +50,15 @@ export class AppController {
     await this.appService.updateStatus(id);
     return res.redirect('/');
   }
+
+  @UsePipes(new ValidationPipe())
+  @Post('/task/:id')
+  async updateTask(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() dto: CreateDto,
+    @Res() res: Response,
+  ) {
+    await this.appService.updateTask(id, dto);
+    return res.redirect('/');
+  }
 }

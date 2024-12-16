@@ -27,6 +27,7 @@ export class AppService {
       },
     });
   }
+
   async updateStatus(id: number) {
     const found = await this.databaseService.task.findUnique({
       where: {
@@ -52,5 +53,16 @@ export class AppService {
         },
       });
     }
+  }
+
+  async updateTask(id: number, dto: CreateDto) {
+    await this.databaseService.task.update({
+      where: {
+        id: id,
+      },
+      data: {
+        task: dto.task,
+      },
+    });
   }
 }
