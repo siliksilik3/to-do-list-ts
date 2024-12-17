@@ -42,12 +42,14 @@ export class AppController {
     return res.redirect('/');
   }
 
-  @Post('/update/:id')
+  @Post('/update/:id') // 2nd queues step (same Post as it benn before)
   async updateStatus(
     @Param('id', ParseIntPipe) id: number,
     @Res() res: Response,
   ) {
+    console.log('Received ID:', id); // Логирование ID
     await this.appService.updateStatus(id);
+    console.log('Task added to queue'); // Логирование после успешного выполнения
     return res.redirect('/');
   }
 
